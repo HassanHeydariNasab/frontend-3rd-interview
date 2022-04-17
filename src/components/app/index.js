@@ -8,7 +8,9 @@ const App = () => {
     const [numberList, setNumberList] = useState([]);
 
     // Callbacks
-    const addNumberList = () => {
+    const addNumberToList = (event) => {
+        event.preventDefault();
+
         const numberToAdd = +number;
         if (Number.isFinite(numberToAdd)) {
             setNumberList([...numberList, numberToAdd]);
@@ -17,7 +19,7 @@ const App = () => {
     };
 
     return (
-        <div>
+        <form onSubmit={addNumberToList}>
             <h2 className={styles.appTitle}>Factorial!</h2>
             <br />
             <label htmlFor="number">Enter a number from 0 to 9999</label>
@@ -29,7 +31,7 @@ const App = () => {
                 onChange={(event) => setNumber(event.target.value.slice(0, 5))}
             />
             <br />
-            <button onClick={addNumberList}>Add For Calculation</button>
+            <button type="submit">Add For Calculation</button>
             <hr />
             <h2>Output</h2>
             <ul>
@@ -49,7 +51,7 @@ const App = () => {
                     </li>
                 ))}
             </ul>
-        </div>
+        </form>
     );
 };
 
