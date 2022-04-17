@@ -1,0 +1,21 @@
+.appTitle {
+    text-align: center;
+}
+
+.numberInput {
+    width: 100%;
+}
+
+.smallButton {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 0.5rem;
+}
+
+.list {
+    margin: 2rem;
+}
+
+.listItem {
+    padding-top: 1.5rem;
+}
