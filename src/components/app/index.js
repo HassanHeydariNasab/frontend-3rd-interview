@@ -26,35 +26,38 @@ const App = () => {
 
     return (
         <form onSubmit={addNumberToList}>
-            <h2 className={styles.appTitle}>Factorial!</h2>
-            <br />
+            <h1 className={styles.appTitle}>Factorial!</h1>
             <label htmlFor="number">Enter a number from 0 to 9999</label>
             <input
                 className={styles.numberInput}
                 type="number"
                 name="number"
                 value={number}
-                onChange={(event) => setNumber(event.target.value.slice(0, 5))}
+                max={9999}
+                min={0}
+                step={1}
+                onChange={(event) => setNumber(event.target.value)}
             />
-            <br />
             <button type="submit">Add For Calculation</button>
             <hr />
             <h2>Output</h2>
             <ul>
-                {numberList.map((num) => (
-                    <li key={num} className={styles.listItem}>
+                {numberList.map((num, index) => (
+                    <li key={index} className={styles.listItem}>
                         <strong>Result of {num}! is:</strong>
                         <br />
                         <code>
                             {factorials[num]
                                 ? factorials[num].slice(0, 200)
                                 : 'loading...'}
-                            ...
+                            {factorials[num] &&
+                                factorials[num].length > 200 &&
+                                '...'}
                         </code>
                         <button
                             className={styles.smallButton}
                             onClick={() => {
-                                navigator.clipboard.writeText(factorial[num]);
+                                navigator.clipboard.writeText(factorials[num]);
                             }}
                         >
                             Copy
