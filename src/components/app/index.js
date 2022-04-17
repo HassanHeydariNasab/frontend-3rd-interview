@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { factorial } from '../../utils';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 const App = () => {
     // States
@@ -9,18 +9,16 @@ const App = () => {
 
     // Callbacks
     const addNumberList = () => {
-        const numberToAdd = +number
+        const numberToAdd = +number;
         if (Number.isFinite(numberToAdd)) {
-            setNumberList([...numberList, numberToAdd])
+            setNumberList([...numberList, numberToAdd]);
             setNumber('');
         }
-    }
+    };
 
     return (
         <div>
-            <h2 className={styles.appTitle}>
-                Factorial!
-            </h2>
+            <h2 className={styles.appTitle}>Factorial!</h2>
             <br />
             <label htmlFor="number">Enter a number from 0 to 9999</label>
             <input
@@ -35,19 +33,24 @@ const App = () => {
             <hr />
             <h2>Output</h2>
             <ul>
-                {numberList.map(
-                    (num) => <li key={num} className={styles.listItem}>
+                {numberList.map((num) => (
+                    <li key={num} className={styles.listItem}>
                         <strong>Result of {num}! is:</strong>
                         <br />
                         <code>{factorial(num).slice(0, 200)}...</code>
-                        <button className={styles.smallButton} onClick={() => {
-                            navigator.clipboard.writeText(factorial(num))
-                        }}>Copy</button>
+                        <button
+                            className={styles.smallButton}
+                            onClick={() => {
+                                navigator.clipboard.writeText(factorial(num));
+                            }}
+                        >
+                            Copy
+                        </button>
                     </li>
-                )}
+                ))}
             </ul>
         </div>
     );
-}
+};
 
 export default App;
