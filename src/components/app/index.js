@@ -7,14 +7,20 @@ const App = () => {
     const [number, setNumber] = useState('');
     const [numberList, setNumberList] = useState([]);
 
+    const [factorials, setFactorials] = useState({});
+
     // Callbacks
-    const addNumberToList = (event) => {
+    const addNumberToList = async (event) => {
         event.preventDefault();
 
         const numberToAdd = +number;
         if (Number.isFinite(numberToAdd)) {
             setNumberList([...numberList, numberToAdd]);
             setNumber('');
+            const value = await window.calcInWorker(numberToAdd);
+            setFactorials((_factorials) => {
+                return { ..._factorials, [numberToAdd]: value };
+            });
         }
     };
 
@@ -39,11 +45,16 @@ const App = () => {
                     <li key={num} className={styles.listItem}>
                         <strong>Result of {num}! is:</strong>
                         <br />
-                        <code>{factorial(num).slice(0, 200)}...</code>
+                        <code>
+                            {factorials[num]
+                                ? factorials[num].slice(0, 200)
+                                : 'loading...'}
+                            ...
+                        </code>
                         <button
                             className={styles.smallButton}
                             onClick={() => {
-                                navigator.clipboard.writeText(factorial(num));
+                                navigator.clipboard.writeText(factorial[num]);
                             }}
                         >
                             Copy
